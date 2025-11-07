@@ -1,3 +1,5 @@
+const playerImage = new Image();
+playerImage.src = "player"
 export const player = {
     x: 0,
     y: 0,
@@ -5,6 +7,7 @@ export const player = {
     height: 30,
     color: "yellow",
     life: 3,
+    score: 0,
 };
 
 export function initPlayer(canvas) {

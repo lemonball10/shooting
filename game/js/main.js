@@ -9,7 +9,7 @@ const ctx = canvas.getContext("2d");
 initPlayer(canvas);
 
 export const bullets = [];
-const BULLET_SPEED = -20;
+const BULLET_SPEED = -10;
 
 function tryShoot() {
     bullets.push({
@@ -19,6 +19,13 @@ function tryShoot() {
         height: 10,
         vy: BULLET_SPEED,
     })
+}
+
+function updateScore() {
+    const scoreBoard = document.getElementById("scoreBoard");
+        scoreBoard.innerText = `Score: ${player.score}`;
+        const lifeBoard = document.getElementById("lifeBoard");
+        lifeBoard.innerText = `Life: ${player.life}`;
 }
 
 
@@ -47,6 +54,7 @@ function update() {
     spawnEnemy(canvas);
     updateEnemies(canvas);
     handleCollisions();
+    updateScore();
 }
 
 function draw() {
