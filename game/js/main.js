@@ -9,18 +9,18 @@ const ctx = canvas.getContext("2d");
 initPlayer(canvas);
 
 export const bullets = [];
-const BULLET_SPEED = -10;
+const BULLET_SPEED = -30;
 
 function tryShoot() {
     bullets.push({
         x: player.x,
         y: player.y,
-        width: 10,
-        height: 10,
+        width: 20,
+        height: 20,
         vy: BULLET_SPEED,
+        vx: 0,
     })
 }
-
 function updateScore() {
     const scoreBoard = document.getElementById("scoreBoard");
         scoreBoard.innerText = `Score: ${player.score}`;
