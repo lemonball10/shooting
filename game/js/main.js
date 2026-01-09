@@ -6,19 +6,38 @@ import { handleCollisions } from "./colllision.js";
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+const mapImage = new Image();
+mapImage.src = "map.png" ;
+
 initPlayer(canvas);
 
 export const bullets = [];
-const BULLET_SPEED = -30;
+const BULLET_SPEED = -10;
 
 function tryShoot() {
     bullets.push({
-        x: player.x,
+        x: player.x + player.width / 2-5,
         y: player.y,
-        width: 20,
-        height: 20,
+        width: 10,
+        height: 10,
         vy: BULLET_SPEED,
         vx: 0,
+    },
+    {
+        x: player.x + player.width / 2-5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vy: BULLET_SPEED,
+        vx: 1,
+    },
+    {
+        x: player.x + player.width / 2-5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vy: BULLET_SPEED,
+        vx: -1,
     })
 }
 function updateScore() {
@@ -38,6 +57,15 @@ window.addEventListener("keydown", (e) => {
         if (player.x < canvas.width - player.width - 10) {
             player.x += 10;
         }
+    } else if (e.key === "ArrowUp") {
+        if (player.y > 10) {
+            player.y -= 10;
+        }
+    }else if (e.key === "ArrowDown") {
+        if (player.y < canvas.height - player.height - 10) {
+            player.y += 10;
+        }
+
     } else if (e.code === "Space") {
         tryShoot();
     }
@@ -47,6 +75,7 @@ function update() {
     for (let i = 0; i < bullets.length; i++) {
         const bullet = bullets[i];
         bullet.y += bullet.vy;
+        bullet.x += bullet.vx;
         if (bullet.y < 0) {
             bullets.splice(i, 1);
         }
@@ -59,7 +88,7 @@ function update() {
 
 function draw() {
     ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(mapImage,0, 0, canvas.width, canvas.height);
 
     drawPlayer(ctx);
 

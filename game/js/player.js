@@ -6,7 +6,7 @@ export const player = {
     width: 30,
     height: 30,
     color: "yellow",
-    life: 3,
+    life: 5,
     score: 0,
 };
 
